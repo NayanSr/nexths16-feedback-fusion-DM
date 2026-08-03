@@ -1,8 +1,10 @@
-"use client"
+"use client";
 import { Map, MessageSquare, Sparkle } from "lucide-react";
 import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
-
+import { SignOutButton } from "@clerk/nextjs";
+import { SignInButton } from "@clerk/react";
+import { Button } from "./ui/button";
 
 export default function Navbar() {
   return (
@@ -17,7 +19,7 @@ export default function Navbar() {
               <span className="text-xl font-semibold">Feedback Fusion</span>
             </div>
           </Link>
-           <Link
+          <Link
             href="/roadmap"
             className="text-sm hover:text-primary flex items-center gap-1"
           >
@@ -31,9 +33,17 @@ export default function Navbar() {
             <MessageSquare className="h-4 w-4" />
             Feedback
           </Link>
-          <div className="flex items-center gap-4">
-            <ThemeToggle/>
-          </div>
+        </div>
+
+        <div className="flex items-center gap-4">
+          
+            <SignInButton >
+              <Button>
+                <Link href="/sign-in">Sign In</Link>
+              </Button>
+            </SignInButton>
+         
+          <ThemeToggle />
         </div>
       </div>
     </nav>

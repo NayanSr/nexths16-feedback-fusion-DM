@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ClerkProvider} from '@clerk/nextjs'
 import ThemeProvider from "@/components/theme-provider";
+// import { dark, neobrutalism } from '@clerk/ui/themes'
 
 
 
@@ -26,7 +27,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider  
+  //   appearance={{
+  //   theme: dark,
+  //   signIn: { theme: neobrutalism },
+  // }}
+  >
 
    
     <html
@@ -36,7 +42,10 @@ export default function RootLayout({
       <body className={`${inter} min-h-full flex flex-col`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
      <Navbar/>
+   
+
        <main className="flex-1 container mx-auto px-4 py-8">  {children}</main>
+    
         <Footer/>
         <Toaster/>
         </ThemeProvider>
