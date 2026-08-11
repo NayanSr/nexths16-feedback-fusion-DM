@@ -1,17 +1,100 @@
+import { GradientHeader } from "@/components/gradient-header";
 import { Button } from "../components/ui/button";
+import Link from "next/link";
+import { ArrowRight, BarChart, Map, MessageSquare, Users, Zap } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-
-export default function Home() {
+export default function HomePage() {
   return (
-   <div>
-    <button className="bg-teal-500 rounded-sm">Theam</button>
-    <Button variant="secondary">Shaddcn Button</Button>
-
-    
-   </div>
+    <div>
+    {/* //  1. hero section */}
+    <GradientHeader
+      title="Shape the future of our product"
+      subtitle="Feedback Fusion is where your ideas come to life. Suggest features,"
+    >
+      <div className="flex gap-4 justify-center pt-4">
+        <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-200">
+          <Link href="/feedback/new">
+            Submit Feedback <ArrowRight className="ml-2 w-4" />
+          </Link>
+        </Button>
+        <Button size="lg" className="bg-white text-blue-950 hover:bg-gray-400">
+          <Link href="/roadmap">
+            View Roadmapp <Map className="ml-2 w-4" />
+          </Link>
+        </Button>
+      </div>
+    </GradientHeader>
+{/* 2. Feature section */}
+   <section>
+        <h2 className="text-3xl font-bold text-center mb-8">How It Works</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card>
+            <CardHeader>
+              <MessageSquare className=" h-8 w-8 text-primary mb-2" />
+              <CardTitle>Submit Ideas</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Share your suggestion and feature requesrs with the community
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <BarChart className=" h-8 w-8 text-primary mb-2" />
+              <CardTitle>Vote & Prioritize</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Upvote ideas you love to help us understand what matters most.
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <Users className=" h-8 w-8 text-primary mb-2" />
+              <CardTitle>Track Progress</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Follow our public roadmap to see what we&#39;re working on next.
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <Zap className=" h-8 w-8 text-primary mb-2" />
+              <CardTitle>See Results</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Watch as your feedback transforms into real features and
+                improvements.
+              </p>
+            </CardContent>
+          </Card>  
+        </div>
+      </section>
+{/* 3. Stats Section */}
+       <section className="text-center">
+        <div className="inline-grid grid-cols-3 gap-8">
+          <div>
+            <div className="text-3xl font-bold">1,234+</div>
+            <div className="text-muted-foreground">Suggestions</div>
+          </div>
+          <div>
+            <div className="text-3xl font-bold">8,901+</div>
+            <div className="text-muted-foreground">Votes Cast</div>
+          </div>
+          <div>
+            <div className="text-3xl font-bold">254+</div>
+            <div className="text-muted-foreground">Features Shipped</div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 
 // TODO: add a theam change button
-
-
