@@ -6,6 +6,8 @@ export async function syncCurrentUser() {
     // Get user data from clerk
     const clerkUser = await currentUser();
 
+    // console.log('Clerk User: ',clerkUser)
+
     if (!clerkUser) {
       return null;
     }
