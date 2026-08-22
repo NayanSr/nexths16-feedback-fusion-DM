@@ -56,24 +56,24 @@ export default function AdminFeedbackTable({ posts }: { posts: any[] }) {
 
   const saveStatus = async (postId: number) => {
     // show loading toast
-    const loadingToast= toast.loading("Saving status...");
+    const loadingToast = toast.loading("Saving status...");
     try {
-      const response= await fetch(`/api/feedback/${postId}/status`, {
-        method:"PATCH",
-        headers:{"Content-type":"application/json"},
-        body:JSON.stringify({status:postStatus[postId]}),
+      const response = await fetch(`/api/feedback/${postId}/status`, {
+        method: "PATCH",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ status: postStatus[postId] }),
       });
-      if(!response.ok){
-throw new Error("Failed to update status")
+      if (!response.ok) {
+        throw new Error("Failed to update status");
       }
       // Dismiss toast
       toast.dismiss(loadingToast);
       toast.success("Feedback status updated successfully!");
-      setEditingPostId(null)
+      setEditingPostId(null);
     } catch (error) {
       console.error("Failed to update status", error);
       toast.dismiss(loadingToast);
-      toast.error("Failed to update feedback status, Please try again")
+      toast.error("Failed to update feedback status, Please try again");
     }
   };
 
@@ -93,7 +93,7 @@ throw new Error("Failed to update status")
     }));
   };
 
-  console.log("post Status", postStatus)
+  console.log("post Status", postStatus);
 
   return (
     <Card>
@@ -147,9 +147,50 @@ throw new Error("Failed to update status")
                     </div>
                   </TableCell>
                   <TableCell className="align-middle">
-                     {isEditing ? (
+                    {isEditing ? (
                       <>
                         <Select
+                          value={currentStatus}
+                          onValueChange={(value) => {
+                            if (value !== null) {
+                              handleStatusChange(post.id, value);
+                            }
+                          }}
+                        >
+                          <SelectTrigger className="w-[140px]">
+                            <SelectValue>
+                              <div className="flex items-center">
+                                {getStatusIcon(currentStatus)}
+                                {
+                                  STATUS_GROUPS[
+                                    currentStatus as keyof typeof STATUS_GROUPS
+                                  ]?.title
+                                }
+                              </div>
+                            </SelectValue>
+                          </SelectTrigger>
+
+                          <SelectContent>
+                            {STATUS_ORDER.map((status) => {
+                              const statusGroup =
+                                STATUS_GROUPS[
+                                  status as keyof typeof STATUS_GROUPS
+                                ];
+                              const Icon = statusGroup.icon;
+
+                              return (
+                                <SelectItem key={status} value={status}>
+                                  <div className="flex items-center gap-2">
+                                    <Icon className="h-4 w-4" />
+                                    {statusGroup.title}
+                                  </div>
+                                </SelectItem>
+                              );
+                            })}
+                          </SelectContent>
+                        </Select>
+{/* my code bellow above is from ai */}
+                        {/* <Select
                           value={currentStatus}
                           onValueChange={(value) =>
                             handleStatusChange(post.id, value)
@@ -184,7 +225,7 @@ throw new Error("Failed to update status")
                               );
                             })}
                           </SelectContent>
-                        </Select>
+                        </Select> */}
                       </>
                     ) : (
                       <Badge
